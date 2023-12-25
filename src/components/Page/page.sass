@@ -1,0 +1,22 @@
+@use "src/styles/variables"
+
+.page
+  display: flex
+  flex-direction: column
+  width: 100%
+  padding-top: 32px
+  gap: 16px
+  margin-left: variables.$sidebar-width
+  padding: 16px
+  box-sizing: border-box
+
+  &-title
+    text-align: center
+    font-size: 32px
+    color: #fff
+    text-transform: uppercase
+
+.breeds-grid
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+  gap: 16px

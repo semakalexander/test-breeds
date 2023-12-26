@@ -10,6 +10,7 @@ type BreedsState = {
   deselectAll: (isFavorite?: boolean) => void;
   addToFavorites: (breed: Breed) => void;
   removeFromFavorites: (breed: Breed) => void;
+  removeBreed: (breed: Breed) => void;
 };
 
 const useBreedsState = create<BreedsState>()((set) => ({
@@ -98,6 +99,21 @@ const useBreedsState = create<BreedsState>()((set) => ({
 
       return {
         favorites,
+      };
+    }),
+  removeBreed: (breed) =>
+    set(({ breeds }) => {
+      const breedToRemove = breeds.find((b) => b.id === breed.id);
+      const updatedBreeds = breeds.filter((b) => b.id !== breedToRemove.id);
+
+      const isParentEmpty =
+        breed.parentBreedId &&
+        !updatedBreeds.some((b) => b.parentBreedId === breed.parentBreedId);
+
+      return {
+        breeds: isParentEmpty
+          ? updatedBreeds.filter((b) => b.id !== breedToRemove.parentBreedId)
+          : updatedBreeds,
       };
     }),
 }));

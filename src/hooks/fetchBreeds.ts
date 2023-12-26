@@ -39,7 +39,7 @@ const fetchBreeds = () => {
           name: breedName,
           fullName: breedName,
           parentBreedId: null,
-          selected: false,
+          selected: true,
           hasChildren: !!data.message[breedName].length,
         };
 
@@ -49,7 +49,7 @@ const fetchBreeds = () => {
             name: subBreedName,
             fullName: `${breedName} ${subBreedName}`,
             parentBreedId: mainBreed.id,
-            selected: false,
+            selected: true,
           })
         );
 
@@ -70,22 +70,7 @@ const fetchBreeds = () => {
           if (!imageResponse.message || imageResponse.status !== "success")
             return null;
 
-          try {
-            const image = await fetch(imageResponse.message, {
-              mode: "cors",
-              headers: {
-                "Access-Control-Request-Method": "GET",
-                "Access-Control-Request-Headers": "Content-Type",
-                "sec-fetch-dest": "image",
-              },
-            });
-
-            if (!image.ok) return null;
-
-            return { ...breed, imgSrc: imageResponse.message };
-          } catch {
-            return null;
-          }
+          return { ...breed, imgSrc: imageResponse.message };
         })
       );
 

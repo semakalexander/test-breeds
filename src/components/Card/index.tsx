@@ -9,7 +9,8 @@ import "./card.sass";
 const Card: FunctionComponent<{
   breed: Breed;
 }> = ({ breed }) => {
-  const { favorites, addToFavorites, removeFromFavorites } = useBreedsState();
+  const { favorites, addToFavorites, removeFromFavorites, removeBreed } =
+    useBreedsState();
 
   const addedToFavorites = favorites.some((b) => b.id === breed.id);
 
@@ -17,7 +18,12 @@ const Card: FunctionComponent<{
     <div className="breed-card">
       <span className="breed-card-title">{breed.fullName || breed.name}</span>
 
-      <img src={breed.imgSrc} />
+      <img
+        src={breed.imgSrc}
+        onError={() => {
+          removeBreed(breed);
+        }}
+      />
 
       <Button
         className="breed-card-fav-button"

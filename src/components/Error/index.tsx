@@ -1,7 +1,7 @@
-import { FunctionalComponent } from "preact";
+import { FunctionComponent } from "preact";
 import "./error.sass";
 
-const Error: FunctionalComponent<{ error: Error }> = ({ error }) => {
+const Error: FunctionComponent<{ error: Error }> = ({ error }) => {
   return (
     <div className="error">
       <img src="/sad-dog.png" />

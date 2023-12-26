@@ -1,6 +1,7 @@
 @use "src/styles/variables"
 
 .sidebar
+  display: flex
   position: fixed
   top: variables.$header-height
   left: 0
@@ -10,14 +11,13 @@
   width: variables.$sidebar-width
   background: #000
   color: #fff
-  display: flex
+  height: calc(100vh - variables.$header-height)
+  box-sizing: border-box
+  overflow-y: auto
   flex-direction: column
   gap: 16px
-  box-sizing: border-box
-  height: calc(100vh - variables.$header-height)
-  overflow-y: auto
 
-  .actions
+  &-actions
     display: flex
     justify-content: center
     align-items: center
@@ -27,13 +27,13 @@
       font-size: 14px
       padding: 4px 8px
 
-  .list
+  &-list
     display: flex
     flex-direction: column
     gap: 8px
 
   .sublist
-    margin-left: 8px
+    margin-left: 16px
 
   li
     cursor: pointer
@@ -44,3 +44,17 @@
     &.selected:after
       content: '✓'
       margin-left: 4px
+
+@media (max-width: variables.$md)
+  .sidebar
+    display: none
+
+    &.opened
+      display: flex
+      width: 100vw
+
+    &-list
+      gap: 12px
+
+    li
+      font-size: 18px

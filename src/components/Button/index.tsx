@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import type { FunctionalComponent, JSX } from "preact";
+import type { FunctionComponent, JSX } from "preact";
 import "./button.sass";
 
 interface ButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
@@ -7,7 +7,7 @@ interface ButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
-const Button: FunctionalComponent<ButtonProps> = ({ ...props }) => {
+const Button: FunctionComponent<ButtonProps> = ({ ...props }) => {
   const { className = "", active = false, ...buttonProps } = props;
 
   return (

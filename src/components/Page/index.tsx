@@ -8,18 +8,22 @@ const Page = () => {
   const selectedTab = useMainState((state) => state.selectedTab);
   const { breeds, favorites } = useBreedsState();
 
-  const items = selectedTab === Tab.shop ? breeds : favorites;
+  const items = (selectedTab === Tab.shop ? breeds : favorites).filter(
+    (b) => b.selected && !b.hasChildren
+  );
 
   return (
     <div className="page">
       <h1 className="page-title">{selectedTab}</h1>
 
+      {!items.length && (
+        <p className="page-info">Selected breeds will be shown here</p>
+      )}
+
       <div className="breeds-grid">
-        {items
-          .filter((b) => b.selected && !b.hasChildren)
-          .map((breed) => (
-            <Card key={breed.id} breed={breed} />
-          ))}
+        {items.map((breed) => (
+          <Card key={breed.id} breed={breed} />
+        ))}
       </div>
     </div>
   );

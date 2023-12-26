@@ -13,3 +13,24 @@
   top: 0
   left: 0
   right: 0
+
+  &-menu-button
+    display: none
+
+    > svg
+      fill: #fff
+      width: 24px
+      height: 24px
+      margin-top: 4px
+
+  &-actions
+    display: flex
+    justify-content: center
+    align-items: center
+
+@media (max-width: variables.$md)
+  .header
+    justify-content: space-between
+
+    &-menu-button
+      display: block

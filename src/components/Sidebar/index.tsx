@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { FunctionalComponent } from "preact";
+import { FunctionComponent } from "preact";
 import useBreedsState from "../../state/breeds";
 import useMainState from "../../state/main";
 import { Tab } from "../../types";
@@ -7,7 +7,7 @@ import { sortBreeds } from "../../utils";
 import Button from "../Button";
 import "./sidebar.sass";
 
-const ListItem: FunctionalComponent<{
+const ListItem: FunctionComponent<{
   name: string;
   selected: boolean;
   className?: string;
@@ -24,7 +24,7 @@ const ListItem: FunctionalComponent<{
 };
 
 const Sidebar = () => {
-  const selectedTab = useMainState((state) => state.selectedTab);
+  const { selectedTab, isMobileSidebarOpened } = useMainState();
   const { breeds, favorites, selectAll, toggleBreed, deselectAll } =
     useBreedsState();
 
@@ -32,13 +32,17 @@ const Sidebar = () => {
   const isFavorite = selectedTab === Tab.favorites;
 
   return (
-    <aside className="sidebar">
-      <div className="actions">
+    <aside
+      className={classNames("sidebar", {
+        opened: isMobileSidebarOpened,
+      })}
+    >
+      <div className="sidebar-actions">
         <Button onClick={() => selectAll(isFavorite)}>Select All</Button>
         <Button onClick={() => deselectAll(isFavorite)}>Deselect All</Button>
       </div>
 
-      <ul className="list">
+      <ul className="sidebar-list">
         {items.map((breed) => (
           <>
             <ListItem

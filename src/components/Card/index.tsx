@@ -1,12 +1,12 @@
 import classNames from "classnames";
-import { FunctionalComponent } from "preact";
+import { FunctionComponent } from "preact";
 import useBreedsState from "../../state/breeds";
 import { Breed } from "../../types";
 import Button from "../Button";
 import HeartIcon from "../icons/Heart";
 import "./card.sass";
 
-const Card: FunctionalComponent<{
+const Card: FunctionComponent<{
   breed: Breed;
 }> = ({ breed }) => {
   const { favorites, addToFavorites, removeFromFavorites } = useBreedsState();
